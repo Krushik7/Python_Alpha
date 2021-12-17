@@ -1,0 +1,510 @@
+>>> s = "hello"
+>>> import re
+>>> re.findall("hello", s)
+['hello']
+>>> s = "hello how are you how are you doing"
+>>> re.findall("how", s)
+['how', 'how']
+>>> s = "hello how are you How are you doing"
+>>> re.findall("how", s)
+['how']
+>>> re.findall("how", s, re.IGNORECASE)
+['how', 'How']
+>>> re.findall(".", "hello world")
+['h', 'e', 'l', 'l', 'o', ' ', 'w', 'o', 'r', 'l', 'd']
+
+************ matching single character using . **************************
+>>> re.findall("h.", "hello world")
+['he']
+>>> re.findall(".", "ana")
+['a', 'n', 'a']
+>>> re.findall("a.", "ana")
+['an']
+>>> re.findall("a..", "ana")
+['ana']
+>>> re.findall("a.a", "ana")
+['ana']
+>>> re.findall("a.a", "aba")
+['aba']
+>>> re.findall(".a", "aba")
+['ba']
+>>> re.findall("a.a", "a a")
+['a a']
+>>> re.findall("an.a", "anna")
+['anna']
+>>> re.findall("an.a", "anba")
+['anba']
+>>> re.findall("a.+a", "anna")
+['anna']
+
+*************************** matching 1 or more occurrences ***************************
+
+>>> re.findall("a.+a", "annna")
+['annna']
+>>> re.findall("a.+a", "aa")
+[]
+>>> re.findall("a.+a", "anba")
+['anba']
+>>> re.findall("an+a", "anna")
+['anna']
+>>> re.findall("an+a", "annna")
+['annna']
+>>> re.findall("an+a", "annba")
+[]
+>>> re.findall("a+a", "anna")
+[]
+>>> re.findall("a+a", "aa")
+['aa']
+>>> re.findall("a.+a", "aa")
+[]
+
+************************ matching 0 or more occurrences ****************************
+
+>>> re.findall("a.*a", "aa")
+['aa']
+>>> re.findall("a*a", "anna")
+['a', 'a']
+>>> re.findall("he*o","hello")
+[]
+>>> re.findall("he*o","heeeo")
+['heeeo']
+>>> re.findall("he*o","heo")
+['heo']
+>>> re.findall("he*o","ho")
+['ho']
+
+************************ using * + in pattern ***********************
+>>> re.findall("he+o","ho")
+[]
+>>> re.findall("h*eo","hello")
+[]
+>>> re.findall("h*e.*o","hello")
+['hello']
+>>> re.findall("h*eo","eo")
+['eo']
+>>> re.findall("h*eo","heo")
+['heo']
+>>> re.findall("h*e.*o","hello")
+['hello']
+>>>
+>>>
+>>>
+>>> re.findall("hello","hello world")
+['hello']
+>>> re.findall("hello","world hello")
+['hello']
+>>> re.findall("^hello","hello world")
+['hello']
+>>> re.findall("^hello","world hello")
+[]
+>>>
+>>>
+>>> re.findall("hello$","hello world")
+[]
+>>> re.findall("hello$","world hello")
+['hello']
+>>>
+>>>
+>>> re.findall("an?a", "anna")
+[]
+>>> re.findall("an?a", "ana")
+['ana']
+>>> re.findall("an?a", "aa")
+['aa']
+>>>
+>>>
+>>> re.findall("colou?r", "colour")
+['colour']
+>>> re.findall("colou?r", "color")
+['color']
+>>>
+>>> s = "hello world"
+>>> for i in s:
+	if i in "aeiou":
+		print(i)
+
+
+e
+o
+o
+>>> s = "hello world"
+>>> re.findall("[aeiou]", s)
+['e', 'o', 'o']
+>>> len(_)
+3
+>>>
+>>>
+>>> s = "This pen is Rs.100"
+>>> re.findall("[0123456789]", s)
+['1', '0', '0']
+>>> re.findall("[0123456789]+", s)
+['100']
+>>> re.findall("[0-9]+", s)
+['100']
+>>> re.findall("\d", s)
+['1', '0', '0']
+>>> re.findall("\d+", s)
+['100']
+>>> re.findall("\D", s)
+['T', 'h', 'i', 's', ' ', 'p', 'e', 'n', ' ', 'i', 's', ' ', 'R', 's', '.']
+>>> re.findall("\D+", s)
+['This pen is Rs.']
+>>>
+>>>
+>>> re.findall("\D*", s)
+['This pen is Rs.', '', '', '', '']
+>>> re.findall("\D+", s)
+['This pen is Rs.']
+>>>
+>>>
+>>>
+>>> s = "Hi How are you"
+>>> re.findall(".*", s)
+['Hi How are you', '']
+>>> re.findall(".", s)
+['H', 'i', ' ', 'H', 'o', 'w', ' ', 'a', 'r', 'e', ' ', 'y', 'o', 'u']
+>>> re.findall(".+", s)
+['Hi How are you']
+>>> re.findall("[a-z]+", s)
+['i', 'ow', 'are', 'you']
+>>> re.findall("[a-zA-Z]+", s)
+['Hi', 'How', 'are', 'you']
+>>>
+>>> re.findall("[a-zA-Z ]+", s)
+['Hi How are you']
+>>>
+>>>
+>>> s = "Hi How are you"
+>>> re.findall("\w+", s)
+['Hi', 'How', 'are', 'you']
+>>> s = "Hi_How are you"
+>>> re.findall("\w+", s)
+['Hi_How', 'are', 'you']
+>>> s = "Hi_How are you, It is 3 PM"
+>>> re.findall("\w+", s)
+['Hi_How', 'are', 'you', 'It', 'is', '3', 'PM']
+>>> re.findall("\W+", s)
+[' ', ' ', ', ', ' ', ' ', ' ']
+>>>
+>>>
+>>> s = "Hi How are you"
+>>> re.findall(" ", s)
+[' ', ' ', ' ']
+>>> re.findall("\s", s)
+[' ', ' ', ' ']
+>>> re.findall("\S", s)
+['H', 'i', 'H', 'o', 'w', 'a', 'r', 'e', 'y', 'o', 'u']
+>>>
+>>>
+>>>
+>>>
+>>> pin_code = "560050"
+>>> re.findall("\d+", pin_code)
+['560050']
+>>> pin_code = "560050123"
+>>> re.findall("\d+", pin_code)
+['560050123']
+>>> re.findall("\d\d\d\d\d\d", pin_code)
+['560050']
+>>> re.findall("\d{6}", pin_code)
+['560050']
+>>> re.findall("\d{6}$", pin_code)
+['050123']
+>>> re.findall("^\d{6}$", pin_code)
+[]
+>>> re.findall("^\d{6}$", "560050")
+['560050']
+>>> re.findall("^\d{6}$", "56005012")
+[]
+>>> re.findall("^\d{6}$", "56005")
+[]
+>>> re.findall("\b\d{6}\b", "56005")
+[]
+>>> re.findall("\b\d{6}\b", "56005012")
+[]
+>>> re.findall("\b\d{6}\b", "560050")
+[]
+>>> re.findall("\b\d{6}", "560050")
+[]
+>>> re.findall("\d{6}\b", "560050")
+[]
+>>> re.findall("\b\d{6}\b", "The pincode is 560050")
+[]
+>>> re.findall("\b\d+", "The pincode is 560050")
+[]
+>>>
+>>>
+>>>
+>>>
+
+
+>>>
+>>>
+
+
+>>>
+
+>>>
+
+>>>
+
+>>>
+
+>>>
+
+>>>
+>>>
+>>>
+>>>
+>>>
+>>> s = "hai how are you, hello"
+>>> re.findall("^h", s, re.IGNORECASE)
+['h']
+>>> re.findall("^h+", s, re.IGNORECASE)
+['h']
+>>> re.findall("^h*", s, re.IGNORECASE)
+['h']
+>>> re.findall("^h.*", s, re.IGNORECASE)
+['hai how are you, hello']
+>>> re.findall("h.*", s, re.IGNORECASE)
+['hai how are you, hello']
+>>> re.findall("h.+", s, re.IGNORECASE)
+['hai how are you, hello']
+>>> re.findall("^h\w*$", s, re.IGNORECASE)
+[]
+>>> re.findall("^h\w+", s, re.IGNORECASE)
+['hai']
+>>> re.findall("h\w+", s, re.IGNORECASE)
+['hai', 'how', 'hello']
+>>>
+>>>
+>>>
+>>>
+>>>
+>>>
+>>> s = "hai how are you, hello"
+>>>
+>>> re.findall("hai", s)
+['hai']
+>>> re.findall("how", s)
+['how']
+>>> re.findall("hello", s)
+['hello']
+>>> re.findall("h", s)
+['h', 'h', 'h']
+>>> re.findall("h.", s)
+['ha', 'ho', 'he']
+>>> re.findall("h..", s)
+['hai', 'how', 'hel']
+>>> re.findall("h.+", s)
+['hai how are you, hello']
+>>> re.findall("h[a-z]+", s)
+['hai', 'how', 'hello']
+>>> re.findall("h\w+", s)
+['hai', 'how', 'hello']
+>>>
+>>> # re to match words ending with "y"
+>>> s = "Happy birthday to you"
+>>> re.findall("\w+y$", s)
+[]
+>>> re.findall("\w+y", s)
+['Happy', 'birthday']
+>>>
+>>>
+>>>
+>>> # add the numbers
+>>> s = "sony12pvt43ltd798"
+>>> re.findall("\d", s)
+['1', '2', '4', '3', '7', '9', '8']
+>>> total = 0
+>>> l = re.findall("\d", s)
+>>> for i in l:
+	total += int(i)
+
+
+>>> total
+34
+>>> l = re.findall("\d+", s)
+>>> l
+['12', '43', '798']
+>>> total = 0
+>>> for i in l:
+	total += int(i)
+
+
+>>> total
+853
+>>> sentence = "hi hello how are you"
+>>> total = 0
+>>> for i in sentence:
+	if i == " ":
+		total += 1
+
+
+>>> total
+4
+>>>
+>>> re.findall("\s", sentence)
+[' ', ' ', ' ', ' ']
+>>> len(re.findall("\s", sentence))
+4
+>>> len(re.findall("\s", sentence))
+4
+
+>>> # whitespaces in a file
+>>> f_path = r"C:\Users\Vidya\OneDrive\Desktop\Sample.txt"
+>>> with open(f_path) as f:
+	for line in f:
+		print(len(re.findall(" ", line)))
+
+
+0
+2
+1
+4
+>>> # to count the number of occurrences of a particular word in a sentence
+>>> s
+'sony12pvt43ltd798'
+>>> sentence
+'hi hello how are you'
+>>> count = 0
+>>> for i in sentence.split():
+	if i == "how":
+		count += 1
+
+
+>>> count
+1
+>>> len(re.findall("how", sentence))
+1
+>>> s = "hello@world!! welcome!!! to& python***"
+>>>
+>>>
+>>>
+>>>
+>>>
+>>>
+>>>
+>>>
+>>>
+>>>
+>>> 'sony@12pvt%%43ltd##798!!!'
+'sony@12pvt%%43ltd##798!!!'
+
+>>>
+>>>
+>>>
+>>>
+>>> s = "hello@ world:) welcome!!! to python:):)"
+>>>
+>>>
+>>>
+>>>
+>>>
+>>>
+>>>
+>>>
+>>>
+>>>
+>>>
+>>>
+>>>
+>>>
+>>>
+>>>
+>>>
+>>>
+>>>
+>>>
+>>> mobile_num = ["1234456789", "9876543210", "6547893210", "56732456840"]
+>>> re.findall("[6-9]\d+", mobile_num[0])
+['6789']
+>>> re.findall("^[6-9]\d+", mobile_num[0])
+[]
+>>> mobile_num = ["1234456789", "9876543210", "65478932109", "56732456840"]
+>>> re.findall("^[6-9]\d+", mobile_num[2])
+['65478932109']
+>>> re.findall("^[6-9]\d{9}", mobile_num[2])
+['6547893210']
+>>> re.findall("^[6-9]\d{9}$", mobile_num[2])
+[]
+>>> re.findall("^[6-9]\d{9}$", mobile_num[1])
+['9876543210']
+>>> re.findall("^[6-9]\d{9}$", mobile_num[3])
+[]
+>>> for num in mobile_num:
+	print(re.findall("^[6-9]\d{9}$", num))
+
+SyntaxError: invalid escape sequence \d
+>>>
+>>> for num in mobile_num:
+	print(re.findall(r"^[6-9]\d{9}$", num))
+
+
+[]
+['9876543210']
+[]
+[]
+>>>
+>>>
+>>>
+>>> # YYYY-MM-DD
+>>> dates = ["2019-01-02", "2019-13-08", "2021-12-26", "2022-01-32"]
+>>> pat = r"\d{4}-(0[1-9]|1[012])|(0[1-9]|[12][0-9]|3[01])"
+>>> for i in dates:
+	print(re.findall(pat, i))
+
+
+[('01', ''), ('', '02')]
+[('', '20'), ('', '19'), ('', '13'), ('', '08')]
+[('12', ''), ('', '26')]
+[('01', '')]
+>>> pat = r"\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])"
+>>> for i in dates:
+	print(re.findall(pat, i))
+
+
+[('01', '02')]
+[]
+[('12', '26')]
+[]
+>>> pat = r"\d{4}-(?:0[1-9]|1[012])-(?:0[1-9]|[12][0-9]|3[01])"
+>>> for i in dates:
+	print(re.findall(pat, i))
+
+
+['2019-01-02']
+[]
+['2021-12-26']
+[]
+>>>
+>>>
+>>> sentence
+'hi hello how are you'
+>>> s = "hi how are you, how are you doing?"
+>>> re.findall(r"how", s)
+['how', 'how']
+>>> re.finditer(r"how", s)
+<callable_iterator object at 0x000001E54FF25760>
+>>> for i in _:
+	print(i)
+
+
+<re.Match object; span=(3, 6), match='how'>
+<re.Match object; span=(16, 19), match='how'>
+>>> for i in _:
+	print(i.start, i.end)
+
+
+>>> for i in _:
+	print(i.start(), i.end())
+
+
+>>> l = re.finditer(r"how", s)
+>>> for i in l:
+	print(i.start(), i.end())
+
+
+3 6
+16 19
+>>>
