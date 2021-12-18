@@ -74,9 +74,9 @@ f_path = r"C:\Users\Vidya\PycharmProjects\Python_\files\sample.txt"
 
 """ writing into a file """
 
-with open(f_path, "a") as f:
-    print(f.write("hello"))
-    print(f.writelines(["hai\n", "hello\n", "python\n"]))
+# with open(f_path, "a") as f:
+#     print(f.write("hello"))
+#     print(f.writelines(["hai\n", "hello\n", "python\n"]))
 
 
 # count the number of words present in the file
@@ -176,12 +176,45 @@ f_path = r"C:\Users\Vidya\PycharmProjects\Python_\files\sample2.txt"
 #             print(line_no, line)
 
 
-import re
-dates = ["2019-01-02", "2019-13-08", "2021-12-26", "2022-01-32"]
+# count = 0
+# with open(f_path) as file:
+#     for line in file:
+#         count += 1
+#         if count <= 3:
+#             print(line)
 
-pat = r"\d{4}-(?:0[1-9]|1[012])-(?:0[1-9]|[12][0-9]|3[01])"
-for i in dates:
-    print(re.findall(pat, i))
+# read random line
+import itertools
+
+def random_line(file_path, line_no):
+    with open(file_path) as file:
+        res = itertools.islice(file, line_no-1, line_no)
+        print(list(res))
+
+# random_line(f_path, 5)
+
+# read last 2 lines
+
+def last_2_lines(filepath):
+    with open(filepath) as file:
+        lines = 0
+        for _ in file:
+            lines += 1      # 7
+        file.seek(0)
+        res = itertools.islice(file, lines-2, lines)
+        print(list(res))
+
+# last_2_lines(f_path)
+
+from collections import deque
+def last_n_lines(filepath, n):
+    with open(filepath) as file:
+        res = deque(file, n)
+        print(list(res))
+
+last_n_lines(f_path, 2)
+
+
 
 
 

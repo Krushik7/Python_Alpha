@@ -13,7 +13,7 @@
 >>> re.findall(".", "hello world")
 ['h', 'e', 'l', 'l', 'o', ' ', 'w', 'o', 'r', 'l', 'd']
 
-************ matching single character using . **************************
+****************** matching single character using . **************************
 >>> re.findall("h.", "hello world")
 ['he']
 >>> re.findall(".", "ana")
@@ -73,7 +73,7 @@
 >>> re.findall("he*o","ho")
 ['ho']
 
-************************ using * + in pattern ***********************
+************************ using *,+ in pattern ***********************
 >>> re.findall("he+o","ho")
 []
 >>> re.findall("h*eo","hello")
@@ -86,9 +86,8 @@
 ['heo']
 >>> re.findall("h*e.*o","hello")
 ['hello']
->>>
->>>
->>>
+
+********************  matching starting of the string ********************
 >>> re.findall("hello","hello world")
 ['hello']
 >>> re.findall("hello","world hello")
@@ -97,33 +96,31 @@
 ['hello']
 >>> re.findall("^hello","world hello")
 []
->>>
->>>
+
+********************  matching ending of the string ********************
 >>> re.findall("hello$","hello world")
 []
 >>> re.findall("hello$","world hello")
 ['hello']
->>>
->>>
+
+********************  matching zero or more of the string ********************
 >>> re.findall("an?a", "anna")
 []
 >>> re.findall("an?a", "ana")
 ['ana']
 >>> re.findall("an?a", "aa")
 ['aa']
->>>
->>>
 >>> re.findall("colou?r", "colour")
 ['colour']
 >>> re.findall("colou?r", "color")
 ['color']
->>>
+
+********************  matching vowels of the string ********************
+
 >>> s = "hello world"
 >>> for i in s:
 	if i in "aeiou":
 		print(i)
-
-
 e
 o
 o
@@ -132,8 +129,8 @@ o
 ['e', 'o', 'o']
 >>> len(_)
 3
->>>
->>>
+
+********************  matching only digits in the string ********************
 >>> s = "This pen is Rs.100"
 >>> re.findall("[0123456789]", s)
 ['1', '0', '0']
@@ -145,19 +142,19 @@ o
 ['1', '0', '0']
 >>> re.findall("\d+", s)
 ['100']
+
+********************  matching only characters other than digits in the string ********************
 >>> re.findall("\D", s)
 ['T', 'h', 'i', 's', ' ', 'p', 'e', 'n', ' ', 'i', 's', ' ', 'R', 's', '.']
 >>> re.findall("\D+", s)
 ['This pen is Rs.']
->>>
->>>
 >>> re.findall("\D*", s)
 ['This pen is Rs.', '', '', '', '']
 >>> re.findall("\D+", s)
 ['This pen is Rs.']
->>>
->>>
->>>
+
+********************  matching only alphabets in the string ********************
+
 >>> s = "Hi How are you"
 >>> re.findall(".*", s)
 ['Hi How are you', '']
@@ -169,11 +166,10 @@ o
 ['i', 'ow', 'are', 'you']
 >>> re.findall("[a-zA-Z]+", s)
 ['Hi', 'How', 'are', 'you']
->>>
 >>> re.findall("[a-zA-Z ]+", s)
 ['Hi How are you']
->>>
->>>
+
+********************  matching alphabets using \w in the string ********************
 >>> s = "Hi How are you"
 >>> re.findall("\w+", s)
 ['Hi', 'How', 'are', 'you']
@@ -183,21 +179,22 @@ o
 >>> s = "Hi_How are you, It is 3 PM"
 >>> re.findall("\w+", s)
 ['Hi_How', 'are', 'you', 'It', 'is', '3', 'PM']
+
+********************  matching characters other than alphabets using \W in the string ********************
 >>> re.findall("\W+", s)
 [' ', ' ', ', ', ' ', ' ', ' ']
->>>
 >>>
 >>> s = "Hi How are you"
 >>> re.findall(" ", s)
 [' ', ' ', ' ']
+
+********************  matching characters using \s & \S in the string ********************
 >>> re.findall("\s", s)
 [' ', ' ', ' ']
 >>> re.findall("\S", s)
 ['H', 'i', 'H', 'o', 'w', 'a', 'r', 'e', 'y', 'o', 'u']
->>>
->>>
->>>
->>>
+
+********************  matching pincode in the string ********************
 >>> pin_code = "560050"
 >>> re.findall("\d+", pin_code)
 ['560050']
@@ -218,70 +215,14 @@ o
 []
 >>> re.findall("^\d{6}$", "56005")
 []
->>> re.findall("\b\d{6}\b", "56005")
-[]
->>> re.findall("\b\d{6}\b", "56005012")
-[]
->>> re.findall("\b\d{6}\b", "560050")
-[]
->>> re.findall("\b\d{6}", "560050")
-[]
->>> re.findall("\d{6}\b", "560050")
-[]
->>> re.findall("\b\d{6}\b", "The pincode is 560050")
-[]
->>> re.findall("\b\d+", "The pincode is 560050")
-[]
->>>
->>>
->>>
->>>
 
-
->>>
->>>
-
-
->>>
-
->>>
-
->>>
-
->>>
-
->>>
-
->>>
->>>
->>>
->>>
->>>
+********************  matching words starting with "h" in the string ****************
 >>> s = "hai how are you, hello"
->>> re.findall("^h", s, re.IGNORECASE)
-['h']
->>> re.findall("^h+", s, re.IGNORECASE)
-['h']
->>> re.findall("^h*", s, re.IGNORECASE)
-['h']
->>> re.findall("^h.*", s, re.IGNORECASE)
-['hai how are you, hello']
->>> re.findall("h.*", s, re.IGNORECASE)
-['hai how are you, hello']
->>> re.findall("h.+", s, re.IGNORECASE)
-['hai how are you, hello']
->>> re.findall("^h\w*$", s, re.IGNORECASE)
-[]
 >>> re.findall("^h\w+", s, re.IGNORECASE)
 ['hai']
 >>> re.findall("h\w+", s, re.IGNORECASE)
 ['hai', 'how', 'hello']
->>>
->>>
->>>
->>>
->>>
->>>
+
 >>> s = "hai how are you, hello"
 >>>
 >>> re.findall("hai", s)
@@ -302,17 +243,16 @@ o
 ['hai', 'how', 'hello']
 >>> re.findall("h\w+", s)
 ['hai', 'how', 'hello']
->>>
->>> # re to match words ending with "y"
+
+
+******************** re to match words ending with "y" ******************
 >>> s = "Happy birthday to you"
 >>> re.findall("\w+y$", s)
 []
 >>> re.findall("\w+y", s)
 ['Happy', 'birthday']
->>>
->>>
->>>
->>> # add the numbers
+
+******************** add each digit in the string **********************
 >>> s = "sony12pvt43ltd798"
 >>> re.findall("\d", s)
 ['1', '2', '4', '3', '7', '9', '8']
@@ -322,8 +262,8 @@ o
 	total += int(i)
 
 
->>> total
-34
+******************** add numbers in the string (12 + 43 + 798) **********************
+>>> s = "sony12pvt43ltd798"
 >>> l = re.findall("\d+", s)
 >>> l
 ['12', '43', '798']
@@ -331,19 +271,13 @@ o
 >>> for i in l:
 	total += int(i)
 
-
->>> total
-853
+******************** counting whitespaces in the string **********************
 >>> sentence = "hi hello how are you"
 >>> total = 0
 >>> for i in sentence:
 	if i == " ":
 		total += 1
 
-
->>> total
-4
->>>
 >>> re.findall("\s", sentence)
 [' ', ' ', ' ', ' ']
 >>> len(re.findall("\s", sentence))
@@ -351,7 +285,7 @@ o
 >>> len(re.findall("\s", sentence))
 4
 
->>> # whitespaces in a file
+*********************** whitespaces in a file *********************
 >>> f_path = r"C:\Users\Vidya\OneDrive\Desktop\Sample.txt"
 >>> with open(f_path) as f:
 	for line in f:
@@ -362,9 +296,8 @@ o
 2
 1
 4
->>> # to count the number of occurrences of a particular word in a sentence
->>> s
-'sony12pvt43ltd798'
+
+************* number of occurrences of a particular word in a sentence ***********
 >>> sentence
 'hi hello how are you'
 >>> count = 0
@@ -377,92 +310,24 @@ o
 1
 >>> len(re.findall("how", sentence))
 1
->>> s = "hello@world!! welcome!!! to& python***"
->>>
->>>
->>>
->>>
->>>
->>>
->>>
->>>
->>>
->>>
->>> 'sony@12pvt%%43ltd##798!!!'
-'sony@12pvt%%43ltd##798!!!'
 
->>>
->>>
->>>
->>>
->>> s = "hello@ world:) welcome!!! to python:):)"
->>>
->>>
->>>
->>>
->>>
->>>
->>>
->>>
->>>
->>>
->>>
->>>
->>>
->>>
->>>
->>>
->>>
->>>
->>>
->>>
+************************* matching mobile numebrs **************************
 >>> mobile_num = ["1234456789", "9876543210", "6547893210", "56732456840"]
->>> re.findall("[6-9]\d+", mobile_num[0])
-['6789']
->>> re.findall("^[6-9]\d+", mobile_num[0])
-[]
->>> mobile_num = ["1234456789", "9876543210", "65478932109", "56732456840"]
->>> re.findall("^[6-9]\d+", mobile_num[2])
-['65478932109']
->>> re.findall("^[6-9]\d{9}", mobile_num[2])
-['6547893210']
->>> re.findall("^[6-9]\d{9}$", mobile_num[2])
-[]
->>> re.findall("^[6-9]\d{9}$", mobile_num[1])
-['9876543210']
->>> re.findall("^[6-9]\d{9}$", mobile_num[3])
-[]
+
 >>> for num in mobile_num:
 	print(re.findall("^[6-9]\d{9}$", num))
 
-SyntaxError: invalid escape sequence \d
->>>
->>> for num in mobile_num:
-	print(re.findall(r"^[6-9]\d{9}$", num))
-
-
 []
 ['9876543210']
 []
 []
->>>
->>>
->>>
->>> # YYYY-MM-DD
+
+************** matching the pattern YYYY-MM-DD ****************************
 >>> dates = ["2019-01-02", "2019-13-08", "2021-12-26", "2022-01-32"]
->>> pat = r"\d{4}-(0[1-9]|1[012])|(0[1-9]|[12][0-9]|3[01])"
->>> for i in dates:
-	print(re.findall(pat, i))
 
-
-[('01', ''), ('', '02')]
-[('', '20'), ('', '19'), ('', '13'), ('', '08')]
-[('12', ''), ('', '26')]
-[('01', '')]
 >>> pat = r"\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])"
 >>> for i in dates:
 	print(re.findall(pat, i))
-
 
 [('01', '02')]
 []
@@ -477,34 +342,128 @@ SyntaxError: invalid escape sequence \d
 []
 ['2021-12-26']
 []
->>>
->>>
+
+*********************** finditer() ************************
 >>> sentence
 'hi hello how are you'
 >>> s = "hi how are you, how are you doing?"
 >>> re.findall(r"how", s)
 ['how', 'how']
+
 >>> re.finditer(r"how", s)
 <callable_iterator object at 0x000001E54FF25760>
 >>> for i in _:
 	print(i)
 
-
 <re.Match object; span=(3, 6), match='how'>
 <re.Match object; span=(16, 19), match='how'>
->>> for i in _:
-	print(i.start, i.end)
-
-
->>> for i in _:
-	print(i.start(), i.end())
-
 
 >>> l = re.finditer(r"how", s)
 >>> for i in l:
 	print(i.start(), i.end())
 
-
 3 6
 16 19
->>>
+
+************************** index of a particular word in staring ********************
+>>> s = "python is a programming language and programming is fun"
+>>> import re
+>>> match = re.finditer("programming", s)
+>>> match
+<callable_iterator object at 0x000002248F7E5190>
+
+>>> for i in match:
+	print(i)
+<re.Match object; span=(12, 23), match='programming'>
+<re.Match object; span=(37, 48), match='programming'>
+
+>>> match = re.finditer("programming", s)
+>>> for i in match:
+	print(i.start(), i.end(), i.group())
+
+12 23 programming
+37 48 programming
+
+************ normal method **************
+>>> s
+'python is a programming language and programming is fun'
+>>> a = s.find("programming")
+>>> while a != -1:
+	print(a)
+	a = s.find("programming", a + 1)
+
+
+12
+37
+
+************************ sub(), subn() ***********************
+>>> s
+'python is a programming language and programming is fun'
+>>> s.replace("python", "java")
+'java is a programming language and programming is fun'
+
+>>> res = ""
+>>> for char in s:
+	if char in "aeiou":
+		res += "*"
+	else:
+		res += char
+
+>>> res
+'pyth*n *s * pr*gr*mm*ng l*ng**g* *nd pr*gr*mm*ng *s f*n'
+
+>>> re.sub(r"[aeiou]", "*", s)
+'pyth*n *s * pr*gr*mm*ng l*ng**g* *nd pr*gr*mm*ng *s f*n'
+
+>>> s = "hi :) welcome!!!!"
+>>> re.sub(r"[\W_]", "-", s)
+'hi----welcome----'
+
+>>> f_path = r"C:\Users\Vidya\OneDrive\Desktop\Sample.txt"
+>>> with open(f_path) as f:
+	for line in f:
+		a = re.sub(r"Python", "java", line)
+		print(a)
+
+
+hi
+
+how are you
+
+java selenium
+
+java is a programming language
+
+>>> with open(f_path, "r") as f:
+	with open(path+"s2.txt", "w") as f2:
+		for line in f:
+			a = re.sub(r"python", "java", line)
+			f2.write(a)
+
+
+14
+4
+
+********************* words starting with vowels **********************
+>>> s = 'python is a programming language and programming is fun'
+>>> re.findall(r"\b[aeiou]\w*", s)
+['is', 'a', 'and', 'is']
+
+********************* replacing is with are **********************
+>>> s = 'python is a programming language and programming is fun'
+>>> re.subn("is", "are", s)
+('python are a programming language and programming are fun', 2)
+
+****************** match() and search() **************************
+>>> s = """python is a programming language.programming is fun. python is easy"""
+>>> re.search("python", s)
+<re.Match object; span=(0, 6), match='python'>
+>>> re.search("python", s)
+<re.Match object; span=(0, 6), match='python'>
+
+>>> s = """Java is a programming language. programming is fun. python is easy"""
+>>> re.search("python", s)
+<re.Match object; span=(51, 57), match='python'>
+
+>>> s = """Java is a programming language. programming is fun. python is easy"""
+>>> re.match("python", s)
